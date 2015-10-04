@@ -1,0 +1,26 @@
+---
+- name: Install system packages
+  sudo: yes
+  apt: pkg={{ item }} state=present update_cache=yes
+  with_items: [ build-essential, zlibc, zlib1g-dev, ruby, ruby-dev,
+                openssl, libxslt-dev, libxml2-dev, libssl-dev, libreadline6,
+                libreadline6-dev, libyaml-dev, libsqlite3-dev, sqlite3 ]
+
+- name: Create temp folder
+  file: "dest={{ temp_folder }} state=directory"
+
+- name: "Get URL to install bosh-init with version"
+  shell: "echo '{{ bosh_init_url }}' | sed 's#TOOL_VERSION#{{ bosh_init_version }}#g'"
+  register: final_url
+
+- debug: "msg=Fethcing bosh-init archive bosh-init from {{ final_url.stdout }}"
+
+- name: "Fetch and install binary"
+  get_url: "url={{ final_url.stdout }}"
+  sudo: yes
+  register: result
+  until: not result|failed
+  retries: 5
+  args:
+    dest: "/usr/local/bin/bosh-init"
+    mode: 0755

@@ -1,0 +1,3 @@
+---
+bosh_init_version: 0.0.74
+bosh_init_url: "https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-TOOL_VERSION-linux-amd64"
