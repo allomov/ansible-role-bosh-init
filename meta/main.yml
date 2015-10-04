@@ -1,16 +1,16 @@
 ---
 galaxy_info:
-  author: Alexander Lomov
+  author: "Alexander Lomov"
   description: "Provision a VM with bosh-init deployment tool, needed to create BOSH jumpbox"
   company: Altoros
   license: license (GPLv2, CC-BY, etc)
   min_ansible_version: 1.6
   platforms:
-  - name: Ubuntu
-   versions:
-   - all
+    - name: Ubuntu
+      versions:
+       - all
   categories:
-  - cloud
-  - cloudfoundry
-  - clustering
+    - cloud
+    - cloudfoundry
+    - clustering
 dependencies: []
